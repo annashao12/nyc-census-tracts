@@ -1,0 +1,46 @@
+---
+title: "06-12-2024"
+author: "Anna Shao"
+format: html
+execute:
+  echo: false
+---
+
+```{r}
+#| label: setup
+#| message: false
+
+library(tidyverse)
+library(ggbeeswarm)
+nyc <- read_csv("data/nyc_tracts.csv", show_col_types = FALSE)
+```
+
+```{r}
+#| label: plot
+#| warning: false
+
+nyc |> 
+  drop_na() |> 
+  ggplot(aes(x = med_income, 
+             y = race,
+             color = med_income)) +
+  geom_quasirandom() +
+  scale_x_continuous(labels = scales::dollar_format()) +
+  labs(title = "Household income distribution by largest racial/ethnic group",
+       subtitle = "Census tracts, New York City",
+       x = "Median household income",
+       y = "Largest group in Census tract",
+       caption = "Data source: 2016-2020 ACS") +
+  theme_minimal() +
+  scale_color_viridis_c(guide = "none")
+```
+
+```{r}
+# ggplot(nyc, aes(x = fct_reorder(race,med_income,median), y = med_income)) +
+#   geom_boxplot(fill = "lightblue", color = "black") +
+#   labs(title = "Box Plot of Median Income by Race",
+#        x = "Race",
+#        y = "Median Income")
+```
+
+
