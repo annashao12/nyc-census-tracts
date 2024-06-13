@@ -24,7 +24,7 @@ nyc |>
   ggplot(aes(x = med_income, 
              y = race,
              color = med_income)) +
-  geom_quasirandom() +
+  geom_quasirandom(alpha = 0.8) +
   scale_x_continuous(labels = scales::dollar_format()) +
   labs(title = "Household income distribution by largest racial/ethnic group",
        subtitle = "Census tracts, New York City",
